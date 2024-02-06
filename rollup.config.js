@@ -19,7 +19,11 @@ const pkg = require("./package.json");
 const config = [
   {
     external: [/node_modules/],
-    input: "./src/index.ts",
+    input: [
+      "./src/index.tsx",
+      "./src/auth/getAccessToken.ts",
+      "./src/auth/pkce.ts",
+    ],
     output: [
       {
         dir: "./dist",
