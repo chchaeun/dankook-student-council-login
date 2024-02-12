@@ -4,47 +4,31 @@
   "repository": "https://github.com/EveryUniv/dankook-council-login.git",
   "author": "Kim Chae Eun <85024598+chchaeun@users.noreply.github.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "./dist/bundle.js",
   "module": "./dist/index.es.js",
   "browser": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
   "private": false,
-  "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@storybook/addon-essentials": "^7.6.12",
-    "@storybook/addon-interactions": "^7.6.12",
-    "@storybook/addon-links": "^7.6.12",
-    "@storybook/addon-onboarding": "^1.0.11",
-    "@storybook/blocks": "^7.6.12",
-    "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^7.6.12",
-    "@storybook/react-webpack5": "^7.6.12",
-    "@storybook/test": "^7.6.12",
-    "@types/react": "^18.2.51",
-    "css-loader": "^6.10.0",
-    "postcss": "^8.4.33",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rollup": "^4.9.6",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
-    "sass": "^1.70.0",
-    "sass-loader": "^14.1.0",
-    "storybook": "^7.6.12",
-    "style-loader": "^3.3.4",
-    "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "axios": "^1.6.7",
-    "classnames": "^2.5.1",
-    "style-inject": "^0.3.0"
-  },
+  "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup -cw"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.18",
+    "rollup": "^4.9.6",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
   }
 }
