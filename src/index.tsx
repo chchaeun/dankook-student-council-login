@@ -6,6 +6,7 @@ import store from "./utils/store";
 import KEY from "./constants/key";
 import { ComponentProps } from "./types";
 import { useToken } from "./core/useToken";
+import { Tokens } from "./types";
 
 export default function DankookSCLogin({
   clientId,
@@ -41,3 +42,5 @@ export default function DankookSCLogin({
     </button>
   );
 }
+
+export { Tokens };
