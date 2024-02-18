@@ -37,7 +37,7 @@ export default [
     external: ["react", "crypto-js"],
   },
   {
-    input: "./src/index.d.ts",
+    input: "./src/index.tsx",
     output: [{ file: "dist/index.d.ts", format: "cjs" }],
     plugins: [dts()],
   },
