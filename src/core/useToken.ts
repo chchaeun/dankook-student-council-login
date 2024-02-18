@@ -3,24 +3,18 @@ import PATH from "../constants/path";
 import store from "../utils/store";
 import KEY from "../constants/key";
 
-interface Props {
-  authCode?: string;
-}
-
 const useToken = () => {
   let tokens = null;
   let error = null;
 
   return {
     tokens,
-    getTokens: async ({
-      authCode = new URL(window.location.href).searchParams.get("authCode") ||
-        "",
-    }: Props) => {
+    error,
+    getTokens: async (authCode: string) => {
       api()
         .post(PATH.TOKEN, {
           codeVerifier: store(KEY.CODE_VERIFIER).get(),
-          authCode: authCode,
+          authCode,
         })
         .then((res) => {
           const { data } = res;
@@ -28,6 +22,9 @@ const useToken = () => {
         })
         .catch((err) => {
           error = err;
+        })
+        .finally(() => {
+          store(KEY.CODE_VERIFIER).delete();
         });
     },
   };
