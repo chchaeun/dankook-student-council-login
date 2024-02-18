@@ -1,9 +1,38 @@
-import React from "react";
-import { codeChallenge } from "./auth/pkce";
+import React, { useEffect } from "react";
+import api from "./utils/api";
+import PATH from "./constants/path";
+import { codeChallenge, codeVerifier } from "./core/pkce";
+import store from "./utils/store";
+import KEY from "./constants/key";
+import { ComponentProps } from "./types";
+import { useToken } from "./core/useToken";
 
-const DankookCouncilLogin = () => {
+export default function DankookSCLogin({
+  clientId,
+  onSuccess,
+  onError,
+}: ComponentProps) {
+  const { tokens, error, getTokens } = useToken();
+
+  useEffect(() => {
+    const authCode = new URL(window.location.href).searchParams.get(
+      KEY.AUTH_CODE_PARAM
+    );
+
+    authCode && getTokens(authCode);
+  }, [window.location.href]);
+
+  useEffect(() => {
+    tokens && onSuccess(tokens);
+    error && onError && onError(error);
+  }, [tokens, error]);
+
   const onClick = () => {
-    window.location.href = `http://locahost:3000/oauth2/authorize?client_id=what&response_type=code&code_challenge=${codeChallenge}&code_challenge_method=S256`;
+    store(KEY.CODE_VERIFIER).set(codeVerifier);
+    api().get(PATH.AUTHORIZE, {
+      codeChallenge,
+      clientId,
+    });
   };
 
   return (
@@ -11,6 +40,4 @@ const DankookCouncilLogin = () => {
       단국대학교 총학생회 로그인
     </button>
   );
-};
-
-export default DankookCouncilLogin;
+}
