@@ -10,7 +10,7 @@ const useToken = () => {
   return {
     tokens,
     error,
-    getTokens: async (authCode: string) => {
+    getTokens: (authCode: string) => {
       api()
         .post(PATH.TOKEN, {
           codeVerifier: store(KEY.CODE_VERIFIER).get(),
