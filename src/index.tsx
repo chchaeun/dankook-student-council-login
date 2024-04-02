@@ -8,7 +8,7 @@ import { ComponentProps } from "./types";
 import { useToken } from "./core/useToken";
 import { Tokens } from "./types";
 
-export default function DankookSCLogin({
+export default function DankookStudentCouncilLogin({
   clientId,
   onSuccess,
   onError,
