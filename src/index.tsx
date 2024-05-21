@@ -1,46 +1,67 @@
 import React, { useEffect } from "react";
 import api from "./utils/api";
 import PATH from "./constants/path";
-import { codeChallenge, codeVerifier } from "./core/pkce";
 import store from "./utils/store";
 import KEY from "./constants/key";
 import { ComponentProps } from "./types";
-import { useToken } from "./core/useToken";
-import { Tokens } from "./types";
+import { AuthorizeResponse } from "./types";
+import { DEFAULT_STYLE } from "./utils/style";
+import { getCodeChallenge, getCodeVerifier } from "./core/pkce";
 
 export default function DankookStudentCouncilLogin({
   clientId,
+  redirectUri,
   onSuccess,
   onError,
+  style,
+  scope,
 }: ComponentProps) {
-  const { tokens, error, getTokens } = useToken();
-
   useEffect(() => {
     const authCode = new URL(window.location.href).searchParams.get(
       KEY.AUTH_CODE_PARAM
     );
 
-    authCode && getTokens(authCode);
+    authCode &&
+      onSuccess({ authCode, codeVerifier: store(KEY.CODE_VERIFIER).get() });
+
+    store(KEY.CODE_VERIFIER).delete();
   }, [window.location.href]);
 
-  useEffect(() => {
-    tokens && onSuccess(tokens);
-    error && onError && onError(error);
-  }, [tokens, error]);
-
   const onClick = () => {
+    const codeVerifier = getCodeVerifier();
+
     store(KEY.CODE_VERIFIER).set(codeVerifier);
-    api().get(PATH.AUTHORIZE, {
-      codeChallenge,
-      clientId,
-    });
+
+    api()
+      .get(PATH.AUTHORIZE, {
+        codeChallenge: getCodeChallenge(codeVerifier),
+        clientId,
+        redirectUri,
+        scope,
+        responseType: "code",
+        codeChallengeMethod: "S256",
+      })
+      .then((res) => {
+        const { redirectUri } = res;
+        if (redirectUri) {
+          window.location.href = redirectUri;
+          return;
+        }
+      })
+      .catch((err) => {
+        onError && onError(err);
+      });
   };
 
   return (
-    <button type="button" onClick={onClick}>
+    <button
+      type="button"
+      onClick={onClick}
+      style={{ ...DEFAULT_STYLE, ...style }}
+    >
       단국대학교 총학생회 로그인
     </button>
   );
 }
 
-export { Tokens };
+export { AuthorizeResponse };
