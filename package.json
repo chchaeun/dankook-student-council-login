@@ -1,7 +1,10 @@
 {
-  "name": "dankook-sc-login",
+  "name": "dankook-student-council-login",
   "version": "1.0.2",
-  "repository": "https://github.com/EveryUniv/dankook-council-login.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chchaeun/dankook-student-council-login.git"
+  },
   "author": "Kim Chae Eun <85024598+chchaeun@users.noreply.github.com>",
   "license": "MIT",
   "main": "dist/index.cjs",
@@ -10,6 +13,12 @@
   "types": "dist/index.d.ts",
   "private": false,
   "type": "module",
+  "description": "단국대학교 총학생회 로그인 모듈",
+  "keywords": [
+    "dankook",
+    "login",
+    "oauth"
+  ],
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
