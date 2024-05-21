@@ -1,6 +1,5 @@
 const PATH = {
-  AUTHORIZE: "/oauth/dku",
-  TOKEN: "/oauth/login/dku",
+  AUTHORIZE: "/oauth/authorize",
 };
 
 export default PATH;
