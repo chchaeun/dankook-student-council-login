@@ -4,16 +4,14 @@ type APIMethod = () => {
 };
 
 const api: APIMethod = () => {
-  const BASE_URL = "http://localhost:3000";
+  const BASE_URL = "https://next.danvery.com/api";
 
   const options: RequestInit = {
-    mode: "cors",
     cache: "no-store",
-    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
     },
-    redirect: "follow",
+    redirect: "manual",
     referrerPolicy: "no-referrer",
   };
 
