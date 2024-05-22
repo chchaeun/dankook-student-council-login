@@ -4,7 +4,7 @@ type APIMethod = () => {
 };
 
 const api: APIMethod = () => {
-  const BASE_URL = "https://next.danvery.com/api";
+  const BASE_URL = "https://danvery.com/api";
 
   const options: RequestInit = {
     cache: "no-store",
