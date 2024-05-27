@@ -11,10 +11,9 @@ import { getCodeChallenge, getCodeVerifier } from "./core/pkce";
 export default function DankookStudentCouncilLogin({
   clientId,
   redirectUri,
+  style = {},
   onSuccess,
   onError,
-  style,
-  scope,
 }: ComponentProps) {
   useEffect(() => {
     const authCode = new URL(window.location.href).searchParams.get(
@@ -37,7 +36,6 @@ export default function DankookStudentCouncilLogin({
         codeChallenge: getCodeChallenge(codeVerifier),
         clientId,
         redirectUri,
-        scope,
         responseType: "code",
         codeChallengeMethod: "S256",
       })
