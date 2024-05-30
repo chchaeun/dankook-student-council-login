@@ -24,8 +24,6 @@ yarn add dankook-student-council-login
 
 ## Usage
 
-- React
-
 ```typescript
 import DankookStudentCouncilLogin from "dankook-student-council-login";
 
@@ -34,23 +32,6 @@ import DankookStudentCouncilLogin from "dankook-student-council-login";
   redirectUri={redirectUri}
   onSuccess={onSuccess}
 />;
-```
-
-- Next.js
-  ssr 환경에서 동작하지 않으므로 동적 import가 필요합니다.
-
-```typescript
-
-const DankookStudentCouncilLogin = dynamic(
-  () => import("dankook-student-council-login"),
-  {
-    ssr: false,
-  }
-);
-
-<DankookStudentCouncilLogin
-    ...
-/>
 ```
 
 ## Property
